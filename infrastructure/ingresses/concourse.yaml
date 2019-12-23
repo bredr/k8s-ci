@@ -1,0 +1,14 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: concourse-web-ui
+  namespace: ci
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ci-web
+              servicePort: atc
