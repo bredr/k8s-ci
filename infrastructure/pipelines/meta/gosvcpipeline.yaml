@@ -1,0 +1,20 @@
+resources:
+  - name: code
+    type: git
+    icon: git
+    source:
+      uri: git@github.com:bredr/k8s-ci.git
+      branch: master
+      private_key: ((git.private-repo-key))
+      paths: [services/${SERVICE}]    
+
+jobs:
+- name: build-${SERVICE}
+  plan:
+  - get: code
+    trigger: true
+  - task: build
+    file: code/infrastructure/meta/gobuildtask.yaml
+    params:
+      SERVICE: ${SERVICE}
+---

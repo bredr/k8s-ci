@@ -1,0 +1,14 @@
+platform: linux
+
+image_resource:
+  type: registry-image
+  source: { repository: golang }
+
+inputs:
+  - name: code
+
+caches:
+  - path: gopath/
+
+run:
+  path: code/infrastructure/pipelines/ci/build.sh

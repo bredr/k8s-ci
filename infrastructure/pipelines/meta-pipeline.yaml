@@ -1,0 +1,40 @@
+---
+resources:
+  - name: meta-pipeline
+    type: git
+    icon: git
+    source:
+      uri: git@github.com:bredr/k8s-ci.git
+      branch: master
+      private_key: ((git.private-repo-key))
+  - name: pipelines
+    type: concourse-pipeline
+    source:
+      target: http://${LOCAL_IP}
+      insecure: "false"
+      teams:
+        - name: main
+          username: ((concourse.username))
+          password: ((concourse.password))
+
+jobs:
+  - name: set-pipeline
+    public: true
+    plan:
+      - get: meta-pipeline
+        trigger: true
+      - task: generate-pipelines
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: { repository: busybox }
+          inputs:
+            - name: meta-pipeline
+          outputs:
+            - name: generated-pipelines.yaml
+          run:
+            path: infrastructure/pipelines/meta/generatePipeline.sh
+      - put: pipelines
+        params:
+          pipelines_file: generated-pipelines.yaml
