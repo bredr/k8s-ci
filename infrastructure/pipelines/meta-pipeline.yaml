@@ -32,7 +32,7 @@ jobs:
           inputs:
             - name: meta-pipeline
           outputs:
-            - name: generated-pipelines.yaml
+            - name: out
           run:
             path: /bin/sh
             args:
@@ -41,4 +41,4 @@ jobs:
               ]
       - put: pipelines
         params:
-          pipelines_file: generated-pipelines.yaml
+          pipelines_file: out/generated-pipelines.yaml
