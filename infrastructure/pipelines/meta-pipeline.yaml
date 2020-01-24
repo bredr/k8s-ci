@@ -15,8 +15,8 @@ resources:
   - name: pipelines
     type: concourse-pipeline
     source:
-      target: http://${LOCAL_IP}
-      insecure: "false"
+      target: http://$LOCAL_IP
+      insecure: "true"
       teams:
         - name: main
           username: ((concourse.username))

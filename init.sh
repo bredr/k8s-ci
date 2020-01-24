@@ -31,7 +31,7 @@ echo $mag Installing Concourse... $white
 helm repo add concourse https://concourse-charts.storage.googleapis.com/
 helm repo update 
 kubectl apply -f infrastructure/namespaces/ci.yaml
-LOCAL_IP=`minikube -p ci ip`
+export LOCAL_IP=`minikube -p ci ip`
 echo $blu Hosting on $LOCAL_IP $white
 helm upgrade ci concourse/concourse --version=8.4.1 --namespace ci --install --force --wait -f <(envsubst < infrastructure/thirdparties/concourse.yaml) 
 echo $grn Installed Concourse $white
