@@ -15,8 +15,6 @@ jobs:
   - get: code
     trigger: true
   - task: build
-    inputs:
-      - name: code
     file: code/infrastructure/pipelines/meta/gobuildtask.yaml
     params:
       SERVICE: ${SERVICE}
