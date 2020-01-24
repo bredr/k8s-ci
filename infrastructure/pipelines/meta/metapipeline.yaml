@@ -1,4 +1,4 @@
-- name: ${SERVICE}
+- name: ${SERVICE}-build
   team: main
   config_file: out/${SERVICE}.yaml
   unpaused: true
