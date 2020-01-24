@@ -7,7 +7,7 @@ resources:
       uri: git@github.com:bredr/k8s-ci.git
       branch: master
       private_key: ((git.private-repo-key))
-      paths: [services/${SERVICE}, infrastructure/pipelines]    
+      paths: [services/${SERVICE}]    
 
 jobs:
 - name: build-${SERVICE}
