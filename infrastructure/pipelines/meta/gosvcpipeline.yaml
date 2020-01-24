@@ -1,3 +1,4 @@
+---
 resources:
   - name: code
     type: git
@@ -17,4 +18,3 @@ jobs:
     file: code/infrastructure/meta/gobuildtask.yaml
     params:
       SERVICE: ${SERVICE}
----

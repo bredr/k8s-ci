@@ -1,4 +1,9 @@
 ---
+resource_types:
+  - name: concourse-pipeline
+    type: docker-image
+    source:
+      repository: concourse/concourse-pipeline-resource
 resources:
   - name: meta-pipeline
     type: git
@@ -40,5 +45,6 @@ jobs:
                 "meta-pipeline/infrastructure/pipelines/meta/generatePipeline.sh",
               ]
       - put: pipelines
+        inputs: [out]
         params:
           pipelines_file: out/generated-pipelines.yaml
