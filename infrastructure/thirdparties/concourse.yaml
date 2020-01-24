@@ -176,7 +176,7 @@ concourse:
     ##
     ## Example: http://ci.concourse-ci.org
     ##
-    externalUrl: http://${LOCAL_IP}
+    externalUrl: http://$LOCAL_IP
 
     encryption:
       ## Enable encryption of pipeline configuration. Encryption keys can be set via secrets

@@ -23,18 +23,22 @@ esac
 echo $blu Running on $OS_NAME $white
 echo ""
 
+echo $mag Starting minikube ci $white
+minikube start -p ci
+kubectl config use-context ci
+
 echo $mag Installing Concourse... $white
 helm repo add concourse https://concourse-charts.storage.googleapis.com/
 helm repo update 
 kubectl apply -f infrastructure/namespaces/ci.yaml
-LOCAL_IP=`minikube ip`
+LOCAL_IP=`minikube -p ci ip`
 echo $blu Hosting on $LOCAL_IP $white
-helm upgrade ci concourse/concourse --namespace ci --install --force --wait -f <(envsubst < infrastructure/thirdparties/concourse.yaml) 
+helm upgrade ci concourse/concourse --version=8.4.1 --namespace ci --install --force --wait -f <(envsubst < infrastructure/thirdparties/concourse.yaml) 
 echo $grn Installed Concourse $white
 echo ""
 
 echo $mag Setting up ingress... $white
-minikube addons enable ingress
+minikube -p ci addons enable ingress
 kubectl apply -f infrastructure/ingresses/concourse.yaml
 echo $grn Setup ingress, access Concourse on http://$LOCAL_IP:80/ $white
 echo ""

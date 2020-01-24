@@ -34,7 +34,11 @@ jobs:
           outputs:
             - name: generated-pipelines.yaml
           run:
-            path: infrastructure/pipelines/meta/generatePipeline.sh
+            path: /bin/sh
+            args:
+              [
+                "meta-pipeline/infrastructure/pipelines/meta/generatePipeline.sh",
+              ]
       - put: pipelines
         params:
           pipelines_file: generated-pipelines.yaml
