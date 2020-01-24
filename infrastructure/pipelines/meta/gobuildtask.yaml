@@ -11,4 +11,5 @@ caches:
   - path: gopath/
 
 run:
-  path: code/infrastructure/pipelines/ci/build.sh
+  path: /bin/sh
+  args: ["code/infrastructure/pipelines/ci/build.sh"]
