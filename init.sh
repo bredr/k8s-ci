@@ -65,7 +65,7 @@ echo $grn logged into concourse $white
 echo $mag Configuring pipelines... $white
 PRIVATE_REPO_KEY=`cat ~/.ssh/id_rsa`
 kubectl create secret generic -n ci-main git --from-literal=private-repo-key=$PRIVATE_REPO_KEY
-kubectl create secret generic -n ci-main concourse --from-literal=username=test --from-literal=username=test
+kubectl create secret generic -n ci-main concourse --from-literal=username=test --from-literal=password=test
 ./fly -t example set-pipeline \
     --pipeline meta-pipeline \
     --config <(envsubst < infrastructure/pipelines/meta-pipeline.yaml) \
